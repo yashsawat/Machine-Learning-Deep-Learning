@@ -1,0 +1,22 @@
+#%%
+pip install ultralytics
+#%%
+pip install wandb
+#%%
+import wandb
+
+from kaggle_secrets import UserSecretsClient
+
+user_secrets = UserSecretsClient()
+
+my_secret = user_secrets.get_secret("wandb_api_key") 
+
+wandb.login(key=my_secret)
+#%%
+import os
+
+from ultralytics import YOLO
+#%%
+model=YOLO("yolov8m.yaml")
+#%%
+results = model.train(data="/kaggle/input/grapes-yolo/yaml-editor-online (4).yaml", epochs=600,patience=0,)
